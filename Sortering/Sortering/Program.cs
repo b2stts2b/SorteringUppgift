@@ -10,7 +10,7 @@ namespace Sortering
     class Program
     {
         static Stopwatch sw = new Stopwatch();
-        static int listStorlek = 10000;
+        static int listStorlek = 0;
 
         static List<int> originalLista = new List<int>();
         //Skapa Listor
@@ -21,28 +21,61 @@ namespace Sortering
         
         static void Main(string[] args)
         {
-            Console.WriteLine("Antal element: " + listStorlek + "\n");
 
-           
-            //Generera originalLista
-            GenereraLista(originalLista);
+            while (true)
+            {
+                Console.Clear();
+                listStorlek = 0;
 
-            //Kopiera Listan
-            CopyList(talLista1, originalLista);
-            CopyList(talLista2, originalLista);
-            CopyList(talLista3, originalLista);
-            CopyList(talLista4, originalLista);
+                Console.WriteLine("Hur många Element i listan vill du ha?");
+                Console.Write("Svar: ");
+                while (listStorlek <= 0)
+                {
+                    string num = Console.ReadLine();
+                    try
+                    {
+                        listStorlek = int.Parse(num);
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Ogiltigt svar. Skriv igen.");
+                        Console.Write("Svar: ");
+                        
+                    }
+                }
+    
+                Console.Clear();
+                Console.WriteLine("Antal element: " + listStorlek + "\n");
 
-            //Sortera Och Mät Tid
-            
-            //Bubble Sort
-            /*TestaBubbleSort(talLista1);    
-            //Selection Sort
-            TestaSelectionSort(talLista2);
-            //Merge Sort
-            TestaMergeSort(talLista3);*/
-            //Quick Sort
-            TestaQuickSort(talLista4);
+
+                //Generera originalLista
+                GenereraLista(originalLista);
+
+                //Kopiera Listan
+                CopyList(talLista1, originalLista);
+                CopyList(talLista2, originalLista);
+                CopyList(talLista3, originalLista);
+                CopyList(talLista4, originalLista);
+
+                //Sortera Och Mät Tid
+
+                //Bubble Sort
+                TestaBubbleSort(talLista1);
+                //Selection Sort
+                TestaSelectionSort(talLista2);
+                //Merge Sort
+                TestaMergeSort(talLista3);
+                //Quick Sort
+                TestaQuickSort(talLista4);
+
+                Console.WriteLine("Börja om? [j/n]");
+                string svar = Console.ReadLine();
+                if (svar.ToLower() == "n")
+                {
+                    break;
+                }
+
+            }
         }
 
         //Testar quick sort
